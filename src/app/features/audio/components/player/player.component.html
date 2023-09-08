@@ -1,0 +1,27 @@
+<mat-toolbar  *ngIf="current">
+  <mat-toolbar-row>
+    {{ state?.readableCurrentTime }}
+    <mat-slider class="time-slider" min="0" [max]="state?.duration"   [disabled]="state?.error || !current">
+      <input matSliderThumb [value]="state?.currentTime" #playValue (input)="onSliderChangeEnd(playValue)">
+    </mat-slider>
+    {{ state?.readableDuration }}
+  </mat-toolbar-row>
+
+  <mat-toolbar-row class="media-action-bar">
+    <button mat-button [disabled]="isFirstPlaying()" (click)="previous()">
+      <mat-icon>skip_previous</mat-icon>
+    </button>
+
+    <button mat-button (click)="play()" *ngIf="!state?.playing">
+      <mat-icon>play_circle_filled</mat-icon>
+    </button>
+
+    <button mat-button (click)="pause()" *ngIf="state?.playing">
+      <mat-icon>pause</mat-icon>
+    </button>
+
+    <button mat-button [disabled]="isLastPlaying()" (click)="next()">
+      <mat-icon>skip_next</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

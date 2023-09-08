@@ -1,0 +1,23 @@
+<table mat-table [dataSource]="playlist">
+  <ng-container matColumnDef="_id">
+    <th mat-header-cell *matHeaderCellDef> ID </th>
+    <td mat-cell *matCellDef="let audio">{{audio.id}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="_audio_name">
+    <th mat-header-cell *matHeaderCellDef> Наименование звука </th>
+    <td mat-cell *matCellDef="let audio">{{audio.audio_name}}</td>
+  </ng-container>
+  <ng-container matColumnDef="_file_name">
+    <th mat-header-cell *matHeaderCellDef> Имя файла звукозаписи </th>
+    <td mat-cell *matCellDef="let audio">{{audio.file_name}}</td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: columns;"
+    (click)="setSelected(row)"
+    [class.row-clicked]="selected?.id === row.id"
+  ></tr>
+</table>
